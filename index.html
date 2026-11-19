@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#52091e">
+<meta name="description" content="FRADA Savings — your dream, your savings.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.png" type="image/png">
+<title>FRADA Savings</title>
+<style>
+:root{--wine:#52091e;--wine2:#74132f;--gold:#d9ad55;--gold2:#f4d68e;--cream:#fff8eb;--ink:#32101b;--muted:#8d7780;--line:#eadfcf}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(145deg,#2b0712,#5b0b23 55%,#2b0712);color:var(--cream);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh}
+.app{max-width:760px;margin:auto;padding:22px 16px 42px}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:22px}
+.brand{display:flex;align-items:center;gap:12px}.brand img{width:54px;height:54px}.brand h1{font-size:23px;letter-spacing:3px;margin:0;color:var(--gold2)}.brand p{margin:3px 0 0;font-size:10px;letter-spacing:2px;color:#e6c98f}
+.pill{border:1px solid #b78b43;color:var(--gold2);border-radius:30px;padding:8px 11px;font-size:11px}
+.panel{background:linear-gradient(135deg,#fff8eb,#f1dfbd);color:var(--ink);border-radius:23px;padding:20px;box-shadow:0 12px 32px #18030b66}
+.eyebrow{font-size:10px;letter-spacing:2px;color:#87632e;font-weight:800}.panel h2{margin:7px 0 5px;font-size:24px;color:#64102a}.sub{font-size:12px;color:#826d59;line-height:1.5}
+label{display:block;font-size:11px;font-weight:800;color:#76572e;margin:16px 0 6px;letter-spacing:.5px}
+input{width:100%;padding:14px;border:1px solid #d5bd94;border-radius:12px;background:#fffdf8;color:#431021;font:inherit;font-size:16px;outline:none}
+input:focus{border-color:#9a6b2c;box-shadow:0 0 0 3px #d9ad5533}
+.btn{border:1px solid #b98c4d;border-radius:12px;padding:12px 15px;background:transparent;color:#f4dcae;font-size:12px;font-weight:800;cursor:pointer}.btn.primary{background:var(--gold);color:#3d1020;border:0}.btn.full{width:100%;margin-top:14px}
+.hero{background:linear-gradient(135deg,#fff8eb,#f1dfbd);color:var(--ink);border-radius:23px;padding:20px;box-shadow:0 12px 32px #18030b66}
+.goalname{font-size:12px;color:#87632e;font-weight:800;letter-spacing:1px;text-transform:uppercase}.amount{font-size:clamp(35px,9vw,52px);font-weight:850;letter-spacing:-2px;margin:5px 0 12px;color:#64102a}
+.progress-head{display:flex;justify-content:space-between;gap:8px;font-size:12px;font-weight:700}.track{height:11px;border-radius:20px;background:#e2d2b5;overflow:hidden;margin:9px 0 7px}.fill{height:100%;width:0;background:linear-gradient(90deg,#9c6421,#e9c36c);border-radius:20px;transition:width .25s}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:15px}.stat{background:#fffaf1;border:1px solid #ead8b8;border-radius:14px;padding:11px}.stat small{display:block;color:#8c7860;font-size:10px;letter-spacing:1px}.stat strong{font-size:18px;color:#551126}
+.section{display:flex;justify-content:space-between;align-items:end;margin:24px 2px 12px;gap:10px}.section h2{font-size:17px;margin:0;color:var(--gold2)}.section span{font-size:11px;color:#d9bd8a}
+.filters{display:flex;gap:7px;overflow:auto;padding:2px 0 12px}.filter{white-space:nowrap;border:1px solid #a87942;background:#4a0a1d;color:#f5dfb4;padding:8px 12px;border-radius:20px;font-size:11px;cursor:pointer}.filter.active{background:var(--gold);color:#3c1020;border-color:var(--gold);font-weight:800}
+.grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}.box{min-height:61px;border-radius:13px;border:1px solid #b88b4b;background:linear-gradient(145deg,#fff8e9,#ead4a8);color:#4d1021;font-weight:800;font-size:13px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;box-shadow:0 3px 0 #9b713d;cursor:pointer}.box small{font-size:8px;font-weight:600;opacity:.65;letter-spacing:.5px}.box.done{background:linear-gradient(145deg,#8d6a34,#c49b51);color:#fff8e8;border-color:#f3d58b;box-shadow:0 3px 0 #68451d;opacity:.88}
+.actions{display:flex;justify-content:space-between;gap:10px;margin:16px 0;flex-wrap:wrap}
+.note{text-align:center;color:#c9aeb5;font-size:10px;line-height:1.6;margin-top:24px}
+.hidden{display:none!important}.error{color:#9a1839;font-size:11px;margin-top:7px;min-height:15px}
+@media(min-width:560px){.grid{grid-template-columns:repeat(8,minmax(0,1fr))}.box{min-height:68px}}
+</style>
+</head>
+<body>
+<main class="app">
+<header class="top">
+ <div class="brand"><img src="icon.png" alt=""><div><h1>FRADA</h1><p>YOUR DREAM. YOUR SAVINGS.</p></div></div>
+ <div class="pill">LKR • PERSONAL GOAL</div>
+</header>
+
+<section id="setup" class="panel">
+ <div class="eyebrow">A NEW SAVINGS JOURNEY</div>
+ <h2>What are you saving for?</h2>
+ <div class="sub">Give your goal a name and choose how much you want to save. FRADA will create a shuffled set of boxes that adds up to your exact target.</div>
+ <label for="goalName">YOUR SAVINGS GOAL</label>
+ <input id="goalName" maxlength="40" placeholder="e.g. Next year's Book Fair">
+ <label for="goalAmount">YOUR TARGET (LKR)</label>
+ <input id="goalAmount" type="number" inputmode="numeric" min="1" max="10000000" placeholder="e.g. 100000">
+ <div class="error" id="setupError"></div>
+ <button class="btn primary full" id="start">Create my savings challenge →</button>
+</section>
+
+<section id="dashboard" class="hidden">
+ <section class="hero">
+  <div class="eyebrow">YOUR SAVINGS JOURNEY</div>
+  <div class="goalname" id="goalTitle">MY SAVINGS GOAL</div>
+  <div class="amount" id="saved">Rs. 0</div>
+  <div class="progress-head"><span id="percent">0% completed</span><span id="remaining">Rs. 0 to go</span></div>
+  <div class="track"><div class="fill" id="fill"></div></div>
+  <div class="stats">
+   <div class="stat"><small>BOXES COMPLETED</small><strong id="completed">0 / 0</strong></div>
+   <div class="stat"><small>BOXES LEFT</small><strong id="left">0</strong></div>
+  </div>
+ </section>
+ <div class="section"><h2>Your saving boxes</h2><span>Tap to mark / unmark</span></div>
+ <nav class="filters" id="filters">
+  <button class="filter active" data-filter="all">All boxes</button>
+  <button class="filter" data-filter="20">Rs. 20</button>
+  <button class="filter" data-filter="50">Rs. 50</button>
+  <button class="filter" data-filter="70">Rs. 70</button>
+  <button class="filter" data-filter="100">Rs. 100</button>
+  <button class="filter" data-filter="500">Rs. 500</button>
+  <button class="filter" data-filter="1000">Rs. 1,000</button>
+  <button class="filter" data-filter="custom">Other</button>
+ </nav>
+ <div class="grid" id="grid" aria-label="Savings boxes"></div>
+ <div class="actions">
+  <button class="btn" id="editGoal">Change goal</button>
+  <button class="btn" id="shuffle">↻ Shuffle boxes</button>
+  <button class="btn primary" id="export">Export progress</button>
+ </div>
+</section>
+<p class="note">Your progress is saved in this browser on this device. It is not shared with other people using the app on their own devices. Export a backup if you need one.</p>
+</main>
+<script>
+const KEY='frada-savings-v2';
+const DENOMS=[20,50,70,100,500,1000];
+let challenge=null,filter='all',boxes=[];
+const $=id=>document.getElementById(id);
+const money=n=>'Rs. '+Number(n).toLocaleString('en-LK');
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function createBoxes(target){
+ let remaining=target,arr=[],id=0;
+ // Use familiar denominations, reserving at most Rs. 1,000 for the final box.
+ while(remaining>1000){
+  const choices=DENOMS.filter(v=>v<=Math.min(1000,remaining-1000));
+  const value=choices[Math.floor(Math.random()*choices.length)];
+  arr.push({id:id++,value,done:false,custom:false});remaining-=value;
+ }
+ if(remaining>0)arr.push({id:id++,value:remaining,done:false,custom:!DENOMS.includes(remaining)});
+ return shuffle(arr);
+}
+function persist(){localStorage.setItem(KEY,JSON.stringify({challenge,boxes}))}
+function load(){
+ try{const data=JSON.parse(localStorage.getItem(KEY));if(data?.challenge&&Array.isArray(data.boxes)){challenge=data.challenge;boxes=data.boxes;showDashboard();return true}}catch(e){}
+ return false;
+}
+function showSetup(){ $('setup').classList.remove('hidden');$('dashboard').classList.add('hidden'); }
+function showDashboard(){ $('setup').classList.add('hidden');$('dashboard').classList.remove('hidden');render(); }
+function startChallenge(){
+ const name=$('goalName').value.trim(),target=Number($('goalAmount').value);
+ if(!name){$('setupError').textContent='Please enter what you are saving for.';return}
+ if(!Number.isSafeInteger(target)||target<1||target>10000000){$('setupError').textContent='Enter a whole-number target from Rs. 1 to Rs. 10,000,000.';return}
+ challenge={name,target};boxes=createBoxes(target);filter='all';persist();showDashboard();
+}
+function update(){
+ const saved=boxes.reduce((s,b)=>s+(b.done?b.value:0),0),done=boxes.filter(b=>b.done).length,pct=saved/challenge.target*100;
+ $('goalTitle').textContent=challenge.name;$('saved').textContent=money(saved);
+ $('percent').textContent=pct.toFixed(1)+'% completed';$('remaining').textContent=money(Math.max(0,challenge.target-saved))+' to go';
+ $('fill').style.width=Math.min(100,pct)+'%';$('completed').textContent=done+' / '+boxes.length;$('left').textContent=boxes.length-done;
+}
+function render(){
+ const grid=$('grid');grid.innerHTML='';
+ boxes.forEach(b=>{
+  const type=DENOMS.includes(b.value)?String(b.value):'custom';
+  if(filter!=='all'&&filter!==type)return;
+  const btn=document.createElement('button');btn.className='box'+(b.done?' done':'');
+  btn.innerHTML=`<span>${b.done?'✓ ':''}${b.value.toLocaleString('en-LK')}</span><small>${b.done?'SAVED':'TAP TO SAVE'}</small>`;
+  btn.setAttribute('aria-label',`Rs. ${b.value}, ${b.done?'saved':'not saved'}`);
+  btn.addEventListener('click',()=>{b.done=!b.done;persist();render()});grid.appendChild(btn);
+ });update();
+}
+$('start').onclick=startChallenge;
+$('filters').addEventListener('click',e=>{const b=e.target.closest('button[data-filter]');if(!b)return;filter=b.dataset.filter;document.querySelectorAll('.filter').forEach(x=>x.classList.toggle('active',x===b));render()});
+$('shuffle').onclick=()=>{shuffle(boxes);persist();render()};
+$('editGoal').onclick=()=>{if(confirm('Changing the goal will create a new challenge and clear the current marked boxes. Export your progress first if you want a backup.')){challenge=null;boxes=[];persist();$('goalName').value='';$('goalAmount').value='';showSetup()}};
+$('export').onclick=()=>{const data={app:'FRADA Savings',goal:challenge,saved:boxes.reduce((s,b)=>s+(b.done?b.value:0),0),completed:boxes.filter(b=>b.done).length,boxes};const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='frada-savings-progress.json';a.click();URL.revokeObjectURL(a.href)};
+if(!load())showSetup();
+if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+</script>
+</body></html>
